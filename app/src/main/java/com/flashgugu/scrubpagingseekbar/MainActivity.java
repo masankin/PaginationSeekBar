@@ -6,22 +6,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SeekBar;
+
+import com.flashgugu.library.widgets.scrubpagingseekbar.ScrubPagingSeekBar;
+
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 public class MainActivity extends ActionBarActivity {
 
     private static String TAG = "SeekBarTest";
 
-    DiscreteSeekBar seekBar;
+    ScrubPagingSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        seekBar = (DiscreteSeekBar)findViewById(R.id.test_seek_bar);
+        seekBar = (ScrubPagingSeekBar)findViewById(R.id.test_seek_bar);
         seekBar.setHapticFeedbackEnabled(true);
         seekBar.setMax(10);
+        seekBar.setMin(1);
 
         seekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override

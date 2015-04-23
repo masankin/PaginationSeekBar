@@ -140,6 +140,8 @@ public class DiscreteSeekBar extends View {
     private int mMax;
     private int mMin;
     private int mValue;
+    private int prevIndex;
+    private int nextIndex;
     private int mKeyProgressIncrement = 1;
     private boolean mMirrorForRtl = false;
     private boolean mAllowTrackClick = true;
@@ -223,7 +225,7 @@ public class DiscreteSeekBar extends View {
 
         mMin = min;
         mMax = Math.max(min + 1, max);
-        mValue = Math.max(min, Math.min(max, value));
+        mValue = Math.max(min, Math.min(max, value))+1;
         updateKeyboardRange();
 
         mIndicatorFormatter = a.getString(R.styleable.DiscreteSeekBar_dsb_indicatorFormatter);
@@ -328,7 +330,8 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMax(int max) {
-        mMax = max;
+        mMax = max+1;
+        nextIndex = mMax;
         if (mMax < mMin) {
             setMin(mMax - 1);
         }
@@ -356,7 +359,8 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMin(int min) {
-        mMin = min;
+        mMin = min-1;
+        prevIndex = mMin;
         if (mMin > mMax) {
             setMax(mMin + 1);
         }
@@ -582,12 +586,14 @@ public class DiscreteSeekBar extends View {
     }
 
     private void updateProgressMessage(int value) {
+
         if (!isInEditMode()) {
-            if (mNumericTransformer.useStringTransform()) {
-                mIndicator.setValue(mNumericTransformer.transformToString(value));
-            } else {
-                mIndicator.setValue(convertValueToMessage(mNumericTransformer.transform(value)));
-            }
+            mIndicator.setValue(Integer.toString(value),Integer.toString(prevIndex),Integer.toString(nextIndex));
+//            if (mNumericTransformer.useStringTransform()) {
+//                mIndicator.setValue(Integer.toString(value),Integer.toString(prevIndex),Integer.toString(nextIndex));
+//            } else {
+//                mIndicator.setValue(convertValueToMessage(mNumericTransformer.transform(value)),convertValueToMessage(mNumericTransformer.transform(prevIndex)),convertValueToMessage(mNumericTransformer.transform(nextIndex)));
+//            }
         }
     }
 

@@ -88,7 +88,12 @@ public class PopupIndicator {
         mPopupView.measure(specWidth, specHeight);
     }
 
-    public void setValue(CharSequence value) {
+    public void setValue(String value, String prevIndex, String nextIndex) {
+        if (value==prevIndex){
+            value = "이전";
+        }else if (value==nextIndex){
+            value = "다음";
+        }
         mPopupView.mMarker.setValue(value);
     }
 
