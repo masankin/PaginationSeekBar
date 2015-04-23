@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
 
         seekBar = (ScrubPagingSeekBar)findViewById(R.id.test_seek_bar);
         seekBar.setHapticFeedbackEnabled(true);
-        seekBar.setMax(10);
+        seekBar.setMax(5);
         seekBar.setMin(1);
 
         seekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
@@ -45,6 +45,11 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
 
+            }
+
+            @Override
+            public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                Log.d(TAG, "prev or next");
             }
         });
 

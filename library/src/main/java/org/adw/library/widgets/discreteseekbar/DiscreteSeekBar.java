@@ -66,6 +66,7 @@ public class DiscreteSeekBar extends View {
 
         public void onStartTrackingTouch(DiscreteSeekBar seekBar);
         public void onStopTrackingTouch(DiscreteSeekBar seekBar);
+        public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
     }
 
     /**
@@ -443,6 +444,10 @@ public class DiscreteSeekBar extends View {
 
     private void notifyProgress(int value, boolean fromUser) {
         if (mPublicChangeListener != null) {
+            if (value==prevIndex||value==nextIndex){
+                mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
+                //다시 Thumbs를 적당한 위치로 돌려야함.
+            }
             mPublicChangeListener.onProgressChanged(DiscreteSeekBar.this, value, fromUser);
         }
         onValueChanged(value);
