@@ -32,6 +32,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -149,6 +150,7 @@ public class DiscreteSeekBar extends View {
     private int mValue;
     private int prevIndex;
     private int nextIndex;
+    private int pageCountPerOneBoard;
     private int mKeyProgressIncrement = 1;
     private boolean mMirrorForRtl = false;
     private boolean mAllowTrackClick = true;
@@ -199,7 +201,7 @@ public class DiscreteSeekBar extends View {
 
         int max = 100;
         int min = 0;
-        int value = 0;
+        int value = 1;
         mMirrorForRtl = a.getBoolean(R.styleable.DiscreteSeekBar_dsb_mirrorForRtl, mMirrorForRtl);
         mAllowTrackClick = a.getBoolean(R.styleable.DiscreteSeekBar_dsb_allowTrackClickToDrag, mAllowTrackClick);
 
@@ -323,9 +325,15 @@ public class DiscreteSeekBar extends View {
         return mNumericTransformer;
     }
 
-    public void setPagecountPerOneboard(int count) {
+    public void setPagecountPerOneboard(int startPageNum, int endPageNum) {
+        setMin(startPageNum - 1);
+        setMax(endPageNum + 1);
+    }
+
+    public void setPagecountPerOneboard(int pageCount) {
+        pageCountPerOneBoard = pageCount;
         setMin(0);
-        setMax(count+1);
+        setMax(pageCount + 1);
     }
 
 
@@ -403,13 +411,11 @@ public class DiscreteSeekBar extends View {
         if (isAnimationRunning()) {
             mPositionAnimator.cancel();
         }
+        mValue = value;
+        notifyProgress(value, fromUser);
+        updateProgressMessage(value);
+        updateThumbPosFromCurrentProgress();
 
-        if (mValue != value) {
-            mValue = value;
-            notifyProgress(value, fromUser);
-            updateProgressMessage(value);
-            updateThumbPosFromCurrentProgress();
-        }
     }
 
     /**
@@ -455,9 +461,19 @@ public class DiscreteSeekBar extends View {
     private void notifyPageChange(int value, boolean fromUser) {
         if (mPublicChangeListener != null) {
             if (value == prevIndex) {
+                if (value > 0) {
+                    setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
+                    setProgress(mMin + 5, true);
+                    //Position 5번으로 커서가 가게해야함.
+                } else if (value <= 0) {
+                    setProgress(1, true);
+                }
                 mPublicChangeListener.onPrevPageChanged(DiscreteSeekBar.this, fromUser);
                 //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (value == nextIndex) {
+
+                setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
+                setProgress(mMax - 5, true);
                 mPublicChangeListener.onNextPageChanged(DiscreteSeekBar.this, fromUser);
             } else {
                 mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
@@ -686,9 +702,11 @@ public class DiscreteSeekBar extends View {
         //Grow the current thumb rect for a bigger touch area
         bounds.inset(-mAddedTouchBounds, -mAddedTouchBounds);
         mIsDragging = (bounds.contains((int) ev.getX(), (int) ev.getY()));
+
         if (!mIsDragging && mAllowTrackClick && !ignoreTrackIfInScrollContainer) {
             //If the user clicked outside the thumb, we compute the current position
-            //and force an immediate drag to it.
+            //and force an immediate drag to it.                    setProgress(mMax-1);
+
             mIsDragging = true;
             mDragOffset = (bounds.width() / 2) - mAddedTouchBounds;
             updateDragging(ev);
@@ -705,6 +723,7 @@ public class DiscreteSeekBar extends View {
                 mPublicChangeListener.onStartTrackingTouch(this);
             }
         }
+
         return mIsDragging;
     }
 
