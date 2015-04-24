@@ -176,7 +176,7 @@ public class Marker extends ViewGroup implements MarkerDrawable.MarkerAnimationL
         animateOpen();
     }
 
-    public void setValue(CharSequence value) {
+    public void setValue(String value) {
         mNumber.setText(value);
     }
 

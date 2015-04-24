@@ -88,13 +88,16 @@ public class PopupIndicator {
         mPopupView.measure(specWidth, specHeight);
     }
 
-    public void setValue(String value, String prevIndex, String nextIndex) {
+    public void setValue(int value, int prevIndex, int nextIndex) {
+        String text = null;
         if (value==prevIndex){
-            value = "이전";
+            text = "이전";
         }else if (value==nextIndex){
-            value = "다음";
+            text = "다음";
+        }else{
+            text = Integer.toString(value);
         }
-        mPopupView.mMarker.setValue(value);
+        mPopupView.mMarker.setValue(text);
     }
 
     public boolean isShowing() {

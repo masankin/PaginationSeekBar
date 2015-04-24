@@ -32,7 +32,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -66,9 +65,13 @@ public class DiscreteSeekBar extends View {
         public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
 
         public void onStartTrackingTouch(DiscreteSeekBar seekBar);
+
         public void onStopTrackingTouch(DiscreteSeekBar seekBar);
+
         public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
+
         public void onPrevPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
+
         public void onNextPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
     }
 
@@ -226,10 +229,10 @@ public class DiscreteSeekBar extends View {
                 value = a.getInteger(indexValue, value);
             }
         }
-
+        setPagecountPerOneboard(5);
         mMin = min;
         mMax = Math.max(min + 1, max);
-        mValue = Math.max(min, Math.min(max, value))+1;
+        mValue = Math.max(min, Math.min(max, value));
         updateKeyboardRange();
 
         mIndicatorFormatter = a.getString(R.styleable.DiscreteSeekBar_dsb_indicatorFormatter);
@@ -320,8 +323,9 @@ public class DiscreteSeekBar extends View {
         return mNumericTransformer;
     }
 
-    public void setPagecountPerOneboard(int count){
-
+    public void setPagecountPerOneboard(int count) {
+        setMin(0);
+        setMax(count+1);
     }
 
 
@@ -339,7 +343,7 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMax(int max) {
-        nextIndex = mMax = max+1;
+        nextIndex = mMax = max;
         if (mMax < mMin) {
             setMin(mMax - 1);
         }
@@ -367,7 +371,7 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMin(int min) {
-        prevIndex = mMin = min-1;
+        prevIndex = mMin = min;
         if (mMin > mMax) {
             setMax(mMin + 1);
         }
@@ -448,14 +452,14 @@ public class DiscreteSeekBar extends View {
         mScrubber.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void notifyPageChange(int value, boolean fromUser){
+    private void notifyPageChange(int value, boolean fromUser) {
         if (mPublicChangeListener != null) {
-            if (value==prevIndex){
+            if (value == prevIndex) {
                 mPublicChangeListener.onPrevPageChanged(DiscreteSeekBar.this, fromUser);
                 //다시 Thumbs를 적당한 위치로 돌려야함.
-            } else if (value==nextIndex){
+            } else if (value == nextIndex) {
                 mPublicChangeListener.onNextPageChanged(DiscreteSeekBar.this, fromUser);
-            } else{
+            } else {
                 mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
             }
         }
@@ -479,7 +483,7 @@ public class DiscreteSeekBar extends View {
 
     /**
      * When the {@link DiscreteSeekBar} enters pressed or focused state
-     * the bubble with the value will be shown, and this method called
+     * the bubble with the value will be shown,더 알아보는 매거진 and this method called
      * <p>
      * Subclasses may override this to add functionality around this event
      * </p>
@@ -594,7 +598,7 @@ public class DiscreteSeekBar extends View {
         }
         if (isEnabled() && (focused || pressed)) {
             //We want to add a small delay here to avoid
-            //poping in/out on simple taps
+            //poping in/ohttp://zangsisi.tumblr.com/post/117160930705/701ut on simple taps
             removeCallbacks(mShowIndicatorRunnable);
             postDelayed(mShowIndicatorRunnable, INDICATOR_DELAY_FOR_TAPS);
         } else {
@@ -609,11 +613,11 @@ public class DiscreteSeekBar extends View {
     private void updateProgressMessage(int value) {
 
         if (!isInEditMode()) {
-            mIndicator.setValue(Integer.toString(value),Integer.toString(prevIndex),Integer.toString(nextIndex));
+            mIndicator.setValue(value, prevIndex, nextIndex);
 //            if (mNumericTransformer.useStringTransform()) {
-//                mIndicator.setValue(Integer.toString(value),Integer.toString(prevIndex),Integer.toString(nextIndex));
+//                mIndicator.setValue(mNumericTransformer.transformToString(value), Integer.toString(prevIndex), Integer.toString(nextIndex));
 //            } else {
-//                mIndicator.setValue(convertValueToMessage(mNumericTransformer.transform(value)),convertValueToMessage(mNumericTransformer.transform(prevIndex)),convertValueToMessage(mNumericTransformer.transform(nextIndex)));
+//                mIndicator.setValue(convertValueToMessage(mNumericTransformer.transform(value)),Integer.toString(prevIndex), Integer.toString(nextIndex));
 //            }
         }
     }
