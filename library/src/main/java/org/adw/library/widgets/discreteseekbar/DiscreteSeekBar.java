@@ -463,7 +463,7 @@ public class DiscreteSeekBar extends View {
             if (value == prevIndex) {
                 if (value > 0) {
                     setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
-                    setProgress(mMin + 5, true);
+                    setProgress(mMin + pageCountPerOneBoard, true);
                     //Position 5번으로 커서가 가게해야함.
                 } else if (value <= 0) {
                     setProgress(1, true);
@@ -471,9 +471,8 @@ public class DiscreteSeekBar extends View {
                 mPublicChangeListener.onPrevPageChanged(DiscreteSeekBar.this, fromUser);
                 //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (value == nextIndex) {
-
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
-                setProgress(mMax - 5, true);
+                setProgress(mMax - pageCountPerOneBoard, true);
                 mPublicChangeListener.onNextPageChanged(DiscreteSeekBar.this, fromUser);
             } else {
                 mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);

@@ -23,7 +23,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         seekBar = (ScrubPagingSeekBar)findViewById(R.id.test_seek_bar);
-        seekBar.setPagecountPerOneboard(1,5);
+
+        seekBar.setPagecountPerOneboard(10);
         seekBar.setHapticFeedbackEnabled(true);
         seekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
@@ -43,17 +44,14 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                Log.d(TAG, "onPageChanged");
             }
 
             @Override
             public void onPrevPageChanged(DiscreteSeekBar seekBar, boolean fromUser) {
-                Log.d(TAG, "onPrevPageChanged");
             }
 
             @Override
             public void onNextPageChanged(DiscreteSeekBar seekBar, boolean fromUser) {
-                Log.d(TAG, "onNextPageChanged");
             }
         });
 
