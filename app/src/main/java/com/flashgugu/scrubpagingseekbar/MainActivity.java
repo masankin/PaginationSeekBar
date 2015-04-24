@@ -24,16 +24,12 @@ public class MainActivity extends ActionBarActivity {
 
         seekBar = (ScrubPagingSeekBar)findViewById(R.id.test_seek_bar);
         seekBar.setHapticFeedbackEnabled(true);
-        seekBar.setMax(5);
-        seekBar.setMin(1);
+        seekBar.setMax(10);
+        seekBar.setMin(6);
 
         seekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                Log.d(TAG, Integer.toString(value));
-                Log.d(TAG, Float.toString(seekBar.getX()));
-                Log.d(TAG, Float.toString(seekBar.getY()));
-                Log.d(TAG, Boolean.toString(fromUser));
 
             }
 
@@ -49,31 +45,19 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                Log.d(TAG, "prev or next");
+                Log.d(TAG, "onPageChanged");
+            }
+
+            @Override
+            public void onPrevPageChanged(DiscreteSeekBar seekBar, boolean fromUser) {
+                Log.d(TAG, "onPrevPageChanged");
+            }
+
+            @Override
+            public void onNextPageChanged(DiscreteSeekBar seekBar, boolean fromUser) {
+                Log.d(TAG, "onNextPageChanged");
             }
         });
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -32,6 +32,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -67,6 +68,8 @@ public class DiscreteSeekBar extends View {
         public void onStartTrackingTouch(DiscreteSeekBar seekBar);
         public void onStopTrackingTouch(DiscreteSeekBar seekBar);
         public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
+        public void onPrevPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
+        public void onNextPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
     }
 
     /**
@@ -317,6 +320,11 @@ public class DiscreteSeekBar extends View {
         return mNumericTransformer;
     }
 
+    public void setPagecountPerOneboard(int count){
+
+    }
+
+
     /**
      * Sets the maximum value for this DiscreteSeekBar
      * if the supplied argument is smaller than the Current MIN value,
@@ -331,8 +339,7 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMax(int max) {
-        mMax = max+1;
-        nextIndex = mMax;
+        nextIndex = mMax = max+1;
         if (mMax < mMin) {
             setMin(mMax - 1);
         }
@@ -360,8 +367,7 @@ public class DiscreteSeekBar extends View {
      * @see #setProgress(int)
      */
     public void setMin(int min) {
-        mMin = min-1;
-        prevIndex = mMin;
+        prevIndex = mMin = min-1;
         if (mMin > mMax) {
             setMax(mMin + 1);
         }
@@ -442,12 +448,22 @@ public class DiscreteSeekBar extends View {
         mScrubber.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
+    private void notifyPageChange(int value, boolean fromUser){
+        if (mPublicChangeListener != null) {
+            if (value==prevIndex){
+                mPublicChangeListener.onPrevPageChanged(DiscreteSeekBar.this, fromUser);
+                //다시 Thumbs를 적당한 위치로 돌려야함.
+            } else if (value==nextIndex){
+                mPublicChangeListener.onNextPageChanged(DiscreteSeekBar.this, fromUser);
+            } else{
+                mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
+            }
+        }
+        onValueChanged(value);
+    }
+
     private void notifyProgress(int value, boolean fromUser) {
         if (mPublicChangeListener != null) {
-            if (value==prevIndex||value==nextIndex){
-                mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
-                //다시 Thumbs를 적당한 위치로 돌려야함.
-            }
             mPublicChangeListener.onProgressChanged(DiscreteSeekBar.this, value, fromUser);
         }
         onValueChanged(value);
@@ -648,6 +664,7 @@ public class DiscreteSeekBar extends View {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                notifyPageChange(mValue, true);
             case MotionEvent.ACTION_CANCEL:
                 stopDragging();
                 break;
