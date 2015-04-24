@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         seekBar = (ScrubPagingSeekBar)findViewById(R.id.test_seek_bar);
-        seekBar.setPagecountPerOneboard(5);
+        seekBar.setPagecountPerOneboard(1,5);
         seekBar.setHapticFeedbackEnabled(true);
         seekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
