@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:psb_pagecount_per_oneboard="5"
+        app:psb_indicatorColor="@color/colorPirmary"
+        app:psb_progressColor="@color/colorPirmary"
         />
 
 </RelativeLayout>

@@ -90,9 +90,9 @@ public class PopupIndicator {
     public void setValue(int value, int prevIndex, int nextIndex) {
         String text = null;
         if (value==prevIndex){
-            text = "이전";
+            text = "Prev";
         }else if (value==nextIndex){
-            text = "다음";
+            text = "Next";
         }else{
             text = Integer.toString(value);
         }
