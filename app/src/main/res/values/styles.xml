@@ -1,8 +1,160 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="YourssuTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPirmary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="YourssuTheme_ActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPirmary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="YourssuTheme.FullScreen" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Widget"/>
+
+    <style name="Widget.YourssuTheme"/>
+
+    <style name="Widget.YourssuTheme.NavigationDrawerItem">
+        <item name="android:clickable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/listPreferredItemHeightSmall</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.NavigationDrawerItem.Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/black_alpha_12</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.NavigationDrawerItem.DividerBold">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/black_alpha_12</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.NavigationDrawerItem.IconView">
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:clickable">false</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.NavigationDrawerItem.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">false</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.Grid">
+        <item name="android:background">#F5F5F5</item>
+
+    </style>
+
+    <style name="Widget.YourssuTheme.GridItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.GridItem.Thumbnail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_height</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.GridItem.Label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/grid_two_line_footer_height</item>
+
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:padding">@dimen/grid_text_padding_16dp</item>
+
+        <item name="android:textSize">@dimen/grid_text_size_14sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.ListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="Widget.YourssuTheme.ListItem.Title">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:padding">@dimen/list_text_padding_8dp</item>
+
+        <item name="android:textSize">@dimen/grid_text_size_14sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <!--<style name="Widget.YourssuTheme.ListItem.InnerLayout">-->
+    <!--<item name="android:layout_width">match_parent</item>-->
+    <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--<item name="android:orientation">horizontal</item>-->
+    <!--<item name="android:background">?android:attr/selectableItemBackground</item>-->
+    <!--<item name="android:clickable">false</item>-->
+    <!--<item name="android:focusable">false</item>-->
+    <!--<item name="android:focusableInTouchMode">false</item>-->
+    <!--</style>-->
+
+    <style name="Widget.YourssuTheme.ListItem.OtherInfoText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textColor">@color/black_alpha_87</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingLeft">@dimen/list_text_padding_8dp</item>
+        <item name="android:paddingRight">@dimen/list_text_padding_8dp</item>
+        <item name="android:paddingBottom">@dimen/list_text_padding_8dp</item>
+
+
+
+        <item name="android:textSize">@dimen/list_text_padding_8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">15</item>
+        <item name="android:ellipsize">end</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+
     </style>
 
 </resources>
