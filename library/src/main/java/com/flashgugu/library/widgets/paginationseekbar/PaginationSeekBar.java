@@ -72,9 +72,9 @@ public class PaginationSeekBar extends View {
 
         public void onPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
 
-        public void onPrevPageChanged(PaginationSeekBar seekBar, boolean fromUser);
+        public void onPrevPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
 
-        public void onNextPageChanged(PaginationSeekBar seekBar, boolean fromUser);
+        public void onNextPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
     }
 
     /**
@@ -469,12 +469,12 @@ public class PaginationSeekBar extends View {
                 } else if (value <= 0) {
                     setProgress(1, true);
                 }
-                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, fromUser);
+                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, value, fromUser);
                 //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (value == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);
-                mPublicChangeListener.onNextPageChanged(PaginationSeekBar.this, fromUser);
+                mPublicChangeListener.onNextPageChanged(PaginationSeekBar.this, value, fromUser);
             } else {
                 mPublicChangeListener.onPageChanged(PaginationSeekBar.this, value, fromUser);
             }
