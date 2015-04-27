@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.compat;
+package com.flashgugu.library.widgets.paginationseekbar.internal.compat;
 
 import android.os.Build;
+
+import com.flashgugu.library.widgets.paginationseekbar.PaginationSeekBar;
 
 /**
  * Currently, there's no {@link android.animation.ValueAnimator} compatibility version
@@ -28,7 +30,7 @@ import android.os.Build;
  * on API>=11
  * </p>
  * <p>
- * This class is used to provide animation to the {@link org.adw.library.widgets.discreteseekbar.DiscreteSeekBar}
+ * This class is used to provide animation to the {@link PaginationSeekBar}
  * when navigating with the Keypad
  * </p>
  *

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar;
+package com.flashgugu.library.widgets.paginationseekbar;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -32,7 +32,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -40,44 +39,46 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
 
-import org.adw.library.widgets.discreteseekbar.internal.PopupIndicator;
-import org.adw.library.widgets.discreteseekbar.internal.compat.AnimatorCompat;
-import org.adw.library.widgets.discreteseekbar.internal.compat.SeekBarCompat;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.ThumbDrawable;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.TrackRectDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.R;
+
+import com.flashgugu.library.widgets.paginationseekbar.internal.PopupIndicator;
+import com.flashgugu.library.widgets.paginationseekbar.internal.compat.AnimatorCompat;
+import com.flashgugu.library.widgets.paginationseekbar.internal.compat.SeekBarCompat;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.MarkerDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.ThumbDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.TrackRectDrawable;
 
 import java.util.Formatter;
 import java.util.Locale;
 
-public class DiscreteSeekBar extends View {
+public class PaginationSeekBar extends View {
 
     /**
      * Interface to propagate seekbar change event
      */
     public interface OnProgressChangeListener {
         /**
-         * When the {@link DiscreteSeekBar} value changes
+         * When the {@link PaginationSeekBar} value changes
          *
-         * @param seekBar  The DiscreteSeekBar
+         * @param seekBar  The PaginationSeekBar
          * @param value    the new value
          * @param fromUser if the change was made from the user or not (i.e. the developer calling {@link #setProgress(int)}
          */
-        public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
+        public void onProgressChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
 
-        public void onStartTrackingTouch(DiscreteSeekBar seekBar);
+        public void onStartTrackingTouch(PaginationSeekBar seekBar);
 
-        public void onStopTrackingTouch(DiscreteSeekBar seekBar);
+        public void onStopTrackingTouch(PaginationSeekBar seekBar);
 
-        public void onPageChanged(DiscreteSeekBar seekBar, int value, boolean fromUser);
+        public void onPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
 
-        public void onPrevPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
+        public void onPrevPageChanged(PaginationSeekBar seekBar, boolean fromUser);
 
-        public void onNextPageChanged(DiscreteSeekBar seekBar, boolean fromUser);
+        public void onNextPageChanged(PaginationSeekBar seekBar, boolean fromUser);
     }
 
     /**
-     * Interface to transform the current internal value of this DiscreteSeekBar to anther one for the visualization.
+     * Interface to transform the current internal value of this PaginationSeekBar to anther one for the visualization.
      * <p/>
      * This will be used on the floating bubble to display a different value if needed.
      * <p/>
@@ -85,7 +86,7 @@ public class DiscreteSeekBar extends View {
      * value seen by the user
      *
      * @see #setIndicatorFormatter(String)
-     * @see #setNumericTransformer(DiscreteSeekBar.NumericTransformer)
+     * @see #setNumericTransformer(PaginationSeekBar.NumericTransformer)
      */
     public static abstract class NumericTransformer {
         /**
@@ -172,15 +173,15 @@ public class DiscreteSeekBar extends View {
     private float mDownX;
     private float mTouchSlop;
 
-    public DiscreteSeekBar(Context context) {
+    public PaginationSeekBar(Context context) {
         this(context, null);
     }
 
-    public DiscreteSeekBar(Context context, AttributeSet attrs) {
+    public PaginationSeekBar(Context context, AttributeSet attrs) {
         this(context, attrs, R.style.DefaultSeekBar);
     }
 
-    public DiscreteSeekBar(Context context, AttributeSet attrs, int defStyle) {
+    public PaginationSeekBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setFocusable(true);
         setWillNotDraw(false);
@@ -196,18 +197,18 @@ public class DiscreteSeekBar extends View {
         mAddedTouchBounds = (touchBounds - thumbSize) / 2;
 
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DiscreteSeekBar,
-                R.attr.discreteSeekBarStyle, defStyle);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PaginationSeekBar,
+                R.attr.paginationSeekBarStyle, defStyle);
 
         int max = 100;
         int min = 0;
         int value = 1;
-        mMirrorForRtl = a.getBoolean(R.styleable.DiscreteSeekBar_dsb_mirrorForRtl, mMirrorForRtl);
-        mAllowTrackClick = a.getBoolean(R.styleable.DiscreteSeekBar_dsb_allowTrackClickToDrag, mAllowTrackClick);
+        mMirrorForRtl = a.getBoolean(R.styleable.PaginationSeekBar_psb_mirrorForRtl, mMirrorForRtl);
+        mAllowTrackClick = a.getBoolean(R.styleable.PaginationSeekBar_psb_allowTrackClickToDrag, mAllowTrackClick);
 
-        int indexMax = R.styleable.DiscreteSeekBar_dsb_max;
-        int indexMin = R.styleable.DiscreteSeekBar_dsb_min;
-        int indexValue = R.styleable.DiscreteSeekBar_dsb_value;
+        int indexMax = R.styleable.PaginationSeekBar_psb_max;
+        int indexMin = R.styleable.PaginationSeekBar_psb_min;
+        int indexValue = R.styleable.PaginationSeekBar_psb_value;
         final TypedValue out = new TypedValue();
         //Not sure why, but we wanted to be able to use dimensions here...
         if (a.getValue(indexMax, out)) {
@@ -237,11 +238,11 @@ public class DiscreteSeekBar extends View {
         mValue = Math.max(min, Math.min(max, value));
         updateKeyboardRange();
 
-        mIndicatorFormatter = a.getString(R.styleable.DiscreteSeekBar_dsb_indicatorFormatter);
+        mIndicatorFormatter = a.getString(R.styleable.PaginationSeekBar_psb_indicatorFormatter);
 
-        ColorStateList trackColor = a.getColorStateList(R.styleable.DiscreteSeekBar_dsb_trackColor);
-        ColorStateList progressColor = a.getColorStateList(R.styleable.DiscreteSeekBar_dsb_progressColor);
-        ColorStateList rippleColor = a.getColorStateList(R.styleable.DiscreteSeekBar_dsb_rippleColor);
+        ColorStateList trackColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_trackColor);
+        ColorStateList progressColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_progressColor);
+        ColorStateList rippleColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_rippleColor);
         boolean editMode = isInEditMode();
         if (editMode && rippleColor == null) {
             rippleColor = new ColorStateList(new int[][]{new int[]{}}, new int[]{Color.DKGRAY});
@@ -289,7 +290,7 @@ public class DiscreteSeekBar extends View {
      *
      * @param formatter
      * @see String#format(String, Object...)
-     * @see #setNumericTransformer(DiscreteSeekBar.NumericTransformer)
+     * @see #setNumericTransformer(PaginationSeekBar.NumericTransformer)
      */
     public void setIndicatorFormatter(@Nullable String formatter) {
         mIndicatorFormatter = formatter;
@@ -297,7 +298,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * Sets the current {@link DiscreteSeekBar.NumericTransformer}
+     * Sets the current {@link PaginationSeekBar.NumericTransformer}
      *
      * @param transformer
      * @see #getNumericTransformer()
@@ -316,7 +317,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * Retrieves the current {@link DiscreteSeekBar.NumericTransformer}
+     * Retrieves the current {@link PaginationSeekBar.NumericTransformer}
      *
      * @return NumericTransformer
      * @see #setNumericTransformer
@@ -338,7 +339,7 @@ public class DiscreteSeekBar extends View {
 
 
     /**
-     * Sets the maximum value for this DiscreteSeekBar
+     * Sets the maximum value for this PaginationSeekBar
      * if the supplied argument is smaller than the Current MIN value,
      * the MIN value will be set to MAX-1
      * <p/>
@@ -367,7 +368,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * Sets the minimum value for this DiscreteSeekBar
+     * Sets the minimum value for this PaginationSeekBar
      * if the supplied argument is bigger than the Current MAX value,
      * the MAX value will be set to MIN+1
      * <p>
@@ -395,7 +396,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * Sets the current progress for this DiscreteSeekBar
+     * Sets the current progress for this PaginationSeekBar
      * The supplied argument will be capped to the current MIN-MAX range
      *
      * @param progress
@@ -428,11 +429,11 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * Sets a listener to receive notifications of changes to the DiscreteSeekBar's progress level. Also
-     * provides notifications of when the DiscreteSeekBar shows/hides the bubble indicator.
+     * Sets a listener to receive notifications of changes to the PaginationSeekBar's progress level. Also
+     * provides notifications of when the PaginationSeekBar shows/hides the bubble indicator.
      *
      * @param listener The seek bar notification listener
-     * @see DiscreteSeekBar.OnProgressChangeListener
+     * @see PaginationSeekBar.OnProgressChangeListener
      */
     public void setOnProgressChangeListener(OnProgressChangeListener listener) {
         mPublicChangeListener = listener;
@@ -468,14 +469,14 @@ public class DiscreteSeekBar extends View {
                 } else if (value <= 0) {
                     setProgress(1, true);
                 }
-                mPublicChangeListener.onPrevPageChanged(DiscreteSeekBar.this, fromUser);
+                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, fromUser);
                 //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (value == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);
-                mPublicChangeListener.onNextPageChanged(DiscreteSeekBar.this, fromUser);
+                mPublicChangeListener.onNextPageChanged(PaginationSeekBar.this, fromUser);
             } else {
-                mPublicChangeListener.onPageChanged(DiscreteSeekBar.this, value, fromUser);
+                mPublicChangeListener.onPageChanged(PaginationSeekBar.this, value, fromUser);
             }
         }
         onValueChanged(value);
@@ -483,7 +484,7 @@ public class DiscreteSeekBar extends View {
 
     private void notifyProgress(int value, boolean fromUser) {
         if (mPublicChangeListener != null) {
-            mPublicChangeListener.onProgressChanged(DiscreteSeekBar.this, value, fromUser);
+            mPublicChangeListener.onProgressChanged(PaginationSeekBar.this, value, fromUser);
         }
         onValueChanged(value);
     }
@@ -497,7 +498,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * When the {@link DiscreteSeekBar} enters pressed or focused state
+     * When the {@link PaginationSeekBar} enters pressed or focused state
      * the bubble with the value will be shown,더 알아보는 매거진 and this method called
      * <p>
      * Subclasses may override this to add functionality around this event
@@ -507,7 +508,7 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * When the {@link DiscreteSeekBar} exits pressed or focused state
+     * When the {@link PaginationSeekBar} exits pressed or focused state
      * the bubble with the value will be hidden, and this method called
      * <p>
      * Subclasses may override this to add functionality around this event
@@ -517,10 +518,10 @@ public class DiscreteSeekBar extends View {
     }
 
     /**
-     * When the {@link DiscreteSeekBar} value changes this method is called
+     * When the {@link PaginationSeekBar} value changes this method is called
      * <p>
      * Subclasses may override this to add functionality around this event
-     * without having to specify a {@link DiscreteSeekBar.OnProgressChangeListener}
+     * without having to specify a {@link PaginationSeekBar.OnProgressChangeListener}
      * </p>
      */
     protected void onValueChanged(int value) {

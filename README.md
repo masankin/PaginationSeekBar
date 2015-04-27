@@ -1,2 +1,2 @@
-# ScrubPagingSeekBar
-ScrubPagingSeekBar
+# PaginationSeekBar
+PaginationSeekBar

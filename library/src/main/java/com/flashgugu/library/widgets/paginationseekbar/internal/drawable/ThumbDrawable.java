@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.drawable;
+package com.flashgugu.library.widgets.paginationseekbar.internal.drawable;
 
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
@@ -27,14 +27,14 @@ import android.support.annotation.NonNull;
 /**
  * <h1>HACK</h1>
  * <p>
- * Special {@link org.adw.library.widgets.discreteseekbar.internal.drawable.StateDrawable} implementation
+ * Special {@link com.flashgugu.library.widgets.paginationseekbar.internal.drawable.StateDrawable} implementation
  * to draw the Thumb circle.
  * </p>
  * <p>
  * It's special because it will stop drawing once the state is pressed/focused BUT only after a small delay.
  * </p>
  * <p>
- * This special delay is meant to help avoiding frame glitches while the {@link org.adw.library.widgets.discreteseekbar.internal.Marker} is added to the Window
+ * This special delay is meant to help avoiding frame glitches while the {@link com.flashgugu.library.widgets.paginationseekbar.internal.Marker} is added to the Window
  * </p>
  *
  * @hide

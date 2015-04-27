@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal;
+package com.flashgugu.library.widgets.paginationseekbar.internal;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.view.GravityCompat;
 import android.util.AttributeSet;
@@ -31,8 +30,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import org.adw.library.widgets.discreteseekbar.internal.compat.SeekBarCompat;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.internal.compat.SeekBarCompat;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.MarkerDrawable;
 
 /**
  * Class to manage the floating bubble thing, similar (but quite worse tested than {@link android.widget.PopupWindow}
@@ -45,16 +44,16 @@ import org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable;
  * @see #showIndicator(android.view.View, android.graphics.Rect)
  * @see #dismiss()
  * @see #dismissComplete()
- * @see org.adw.library.widgets.discreteseekbar.internal.PopupIndicator.Floater
+ * @see com.flashgugu.library.widgets.paginationseekbar.internal.PopupIndicator.Floater
  */
 public class PopupIndicator {
 
     private final WindowManager mWindowManager;
     private boolean mShowing;
     private Floater mPopupView;
-    //Outside listener for the DiscreteSeekBar to get MarkerDrawable animation events.
+    //Outside listener for the PaginationSeekBar to get MarkerDrawable animation events.
     //The whole chain of events goes this way:
-    //MarkerDrawable->Marker->Floater->mListener->DiscreteSeekBar....
+    //MarkerDrawable->Marker->Floater->mListener->PaginationSeekBar....
     //... phew!
     private MarkerDrawable.MarkerAnimationListener mListener;
     private int[] mDrawingLocation = new int[2];
@@ -185,7 +184,7 @@ public class PopupIndicator {
         p.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL;
         p.token = token;
         p.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN;
-        p.setTitle("DiscreteSeekBar Indicator:" + Integer.toHexString(hashCode()));
+        p.setTitle("PaginationSeekBar Indicator:" + Integer.toHexString(hashCode()));
 
         return p;
     }

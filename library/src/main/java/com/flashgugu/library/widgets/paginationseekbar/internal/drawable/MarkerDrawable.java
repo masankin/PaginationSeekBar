@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.drawable;
+package com.flashgugu.library.widgets.paginationseekbar.internal.drawable;
 
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal;
+package com.flashgugu.library.widgets.paginationseekbar.internal;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -31,16 +31,16 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import org.adw.library.widgets.discreteseekbar.R;
-import org.adw.library.widgets.discreteseekbar.internal.compat.SeekBarCompat;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable;
-import org.adw.library.widgets.discreteseekbar.internal.drawable.ThumbDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.R;
+import com.flashgugu.library.widgets.paginationseekbar.internal.compat.SeekBarCompat;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.MarkerDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.ThumbDrawable;
 
 /**
  * {@link android.view.ViewGroup} to be used as the real indicator.
  * <p>
  * I've used this to be able to acomodate the TextView
- * and the {@link org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable}
+ * and the {@link com.flashgugu.library.widgets.paginationseekbar.internal.drawable.MarkerDrawable}
  * with the required positions and offsets
  * </p>
  *
@@ -64,7 +64,7 @@ public class Marker extends ViewGroup implements MarkerDrawable.MarkerAnimationL
     }
 
     public Marker(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.discreteSeekBarStyle);
+        this(context, attrs, R.attr.paginationSeekBarStyle);
     }
 
     public Marker(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -74,11 +74,11 @@ public class Marker extends ViewGroup implements MarkerDrawable.MarkerAnimationL
     public Marker(Context context, AttributeSet attrs, int defStyleAttr, String maxValue) {
         super(context, attrs, defStyleAttr);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DiscreteSeekBar,
-                R.attr.discreteSeekBarStyle, R.style.DefaultSeekBar);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PaginationSeekBar,
+                R.attr.paginationSeekBarStyle, R.style.DefaultSeekBar);
 
         int padding = (int) (PADDING_DP * displayMetrics.density) * 2;
-        int textAppearanceId = a.getResourceId(R.styleable.DiscreteSeekBar_dsb_indicatorTextAppearance,
+        int textAppearanceId = a.getResourceId(R.styleable.PaginationSeekBar_psb_indicatorTextAppearance,
                 R.style.DefaultIndicatorTextAppearance);
         mNumber = new TextView(context);
         //Add some padding to this textView so the bubble has some space to breath
@@ -99,14 +99,14 @@ public class Marker extends ViewGroup implements MarkerDrawable.MarkerAnimationL
 
         mSeparation = (int) (SEPARATION_DP * displayMetrics.density);
         int thumbSize = (int) (ThumbDrawable.DEFAULT_SIZE_DP * displayMetrics.density);
-        ColorStateList color = a.getColorStateList(R.styleable.DiscreteSeekBar_dsb_indicatorColor);
+        ColorStateList color = a.getColorStateList(R.styleable.PaginationSeekBar_psb_indicatorColor);
         mMarkerDrawable = new MarkerDrawable(color, thumbSize);
         mMarkerDrawable.setCallback(this);
         mMarkerDrawable.setMarkerListener(this);
         mMarkerDrawable.setExternalOffset(padding);
 
         //Elevation for anroid 5+
-        float elevation = a.getDimension(R.styleable.DiscreteSeekBar_dsb_indicatorElevation, ELEVATION_DP * displayMetrics.density);
+        float elevation = a.getDimension(R.styleable.PaginationSeekBar_psb_indicatorElevation, ELEVATION_DP * displayMetrics.density);
         ViewCompat.setElevation(this, elevation);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             SeekBarCompat.setOutlineProvider(this, mMarkerDrawable);

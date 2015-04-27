@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,31 +14,27 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.drawable;
+package com.flashgugu.library.widgets.paginationseekbar.internal.drawable;
 
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.support.annotation.NonNull;
 
 /**
- * Simple {@link org.adw.library.widgets.discreteseekbar.internal.drawable.StateDrawable} implementation
- * to draw circles/ovals
+ * Simple {@link com.flashgugu.library.widgets.paginationseekbar.internal.drawable.StateDrawable} implementation
+ * to draw rectangles
  *
  * @hide
  */
-public class TrackOvalDrawable extends StateDrawable {
-    private RectF mRectF = new RectF();
-
-    public TrackOvalDrawable(@NonNull ColorStateList tintStateList) {
+public class TrackRectDrawable extends StateDrawable {
+    public TrackRectDrawable(@NonNull ColorStateList tintStateList) {
         super(tintStateList);
     }
 
     @Override
     void doDraw(Canvas canvas, Paint paint) {
-        mRectF.set(getBounds());
-        canvas.drawOval(mRectF, paint);
+        canvas.drawRect(getBounds(), paint);
     }
 
 }

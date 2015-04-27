@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.compat;
+package com.flashgugu.library.widgets.paginationseekbar.internal.compat;
 
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
@@ -25,7 +25,7 @@ import android.os.Build;
  * for use with AnimatorCompat
  *
  * @hide
- * @see {@link org.adw.library.widgets.discreteseekbar.internal.compat.AnimatorCompat}
+ * @see {@link com.flashgugu.library.widgets.paginationseekbar.internal.compat.AnimatorCompat}
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class AnimatorCompatV11 extends AnimatorCompat {

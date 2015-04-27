@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+  ~ Copyright (c) Jongchan Kim (Flashgugu) 2016.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -17,19 +17,19 @@
 
 <resources>
     <!-- DiscreteSeekBar specific attributes -->
-    <attr name="discreteSeekBarStyle" format="reference"/>
-    <declare-styleable name="DiscreteSeekBar">
-        <attr name="dsb_min" format="integer|dimension"/>
-        <attr name="dsb_max" format="integer|dimension"/>
-        <attr name="dsb_value" format="integer|dimension"/>
-        <attr name="dsb_mirrorForRtl" format="boolean"/>
-        <attr name="dsb_allowTrackClickToDrag" format="boolean"/>
-        <attr name="dsb_progressColor" format="color|reference"/>
-        <attr name="dsb_trackColor" format="color|reference"/>
-        <attr name="dsb_indicatorTextAppearance" format="reference"/>
-        <attr name="dsb_indicatorColor" format="color|reference"/>
-        <attr name="dsb_indicatorElevation" format="dimension"/>
-        <attr name="dsb_indicatorFormatter" format="string|reference"/>
-        <attr name="dsb_rippleColor" format="color|reference"/>
+    <attr name="paginationSeekBarStyle" format="reference"/>
+    <declare-styleable name="PaginationSeekBar">
+        <attr name="psb_min" format="integer|dimension"/>
+        <attr name="psb_max" format="integer|dimension"/>
+        <attr name="psb_value" format="integer|dimension"/>
+        <attr name="psb_mirrorForRtl" format="boolean"/>
+        <attr name="psb_allowTrackClickToDrag" format="boolean"/>
+        <attr name="psb_progressColor" format="color|reference"/>
+        <attr name="psb_trackColor" format="color|reference"/>
+        <attr name="psb_indicatorTextAppearance" format="reference"/>
+        <attr name="psb_indicatorColor" format="color|reference"/>
+        <attr name="psb_indicatorElevation" format="dimension"/>
+        <attr name="psb_indicatorFormatter" format="string|reference"/>
+        <attr name="psb_rippleColor" format="color|reference"/>
     </declare-styleable>
 </resources>

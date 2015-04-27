@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+  ~ Copyright (c) Jongchan Kim (Flashgugu) 2016.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,20 +15,20 @@
   -->
 
 <resources>
-    <color name="dsb_progress_color">#ff009688</color>
-    <color name="dsb_track_color">#ff939393</color>
-    <color name="dsb_disabled_color">#66939393</color>
-    <color name="dsb_ripple_color_pressed">#77939393</color>
-    <color name="dsb_ripple_color_focused">#99999999</color>
+    <color name="psb_progress_color">#ff009688</color>
+    <color name="psb_track_color">#ff939393</color>
+    <color name="psb_disabled_color">#66939393</color>
+    <color name="psb_ripple_color_pressed">#77939393</color>
+    <color name="psb_ripple_color_focused">#99999999</color>
 
     <style name="DefaultSeekBar" parent="android:Widget">
-        <item name="dsb_indicatorTextAppearance">@style/DefaultIndicatorTextAppearance</item>
-        <item name="dsb_progressColor">@color/dsb_progress_color_list</item>
-        <item name="dsb_trackColor">@color/dsb_track_color_list</item>
-        <item name="dsb_rippleColor">@color/dsb_ripple_color_list</item>
-        <item name="dsb_indicatorColor">@color/dsb_progress_color</item>
-        <item name="dsb_indicatorElevation">4dp</item>
-        <item name="dsb_mirrorForRtl">true</item>
+        <item name="psb_indicatorTextAppearance">@style/DefaultIndicatorTextAppearance</item>
+        <item name="psb_progressColor">@color/psb_progress_color_list</item>
+        <item name="psb_trackColor">@color/psb_track_color_list</item>
+        <item name="psb_rippleColor">@color/psb_ripple_color_list</item>
+        <item name="psb_indicatorColor">@color/psb_progress_color</item>
+        <item name="psb_indicatorElevation">4dp</item>
+        <item name="psb_mirrorForRtl">true</item>
     </style>
 
     <style name="DefaultIndicatorTextAppearance" parent="android:TextAppearance.Small">

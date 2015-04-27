@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Gustavo Claramunt (AnderWeb) 2014.
+ * Copyright (c) Jongchan Kim (Flashgugu) 2016.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.adw.library.widgets.discreteseekbar.internal.compat;
+package com.flashgugu.library.widgets.paginationseekbar.internal.compat;
 
 import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
@@ -27,7 +27,7 @@ import android.view.ViewOutlineProvider;
 import android.view.ViewParent;
 import android.widget.TextView;
 
-import org.adw.library.widgets.discreteseekbar.internal.drawable.MarkerDrawable;
+import com.flashgugu.library.widgets.paginationseekbar.internal.drawable.MarkerDrawable;
 
 /**
  * Wrapper compatibility class to call some API-Specific methods
