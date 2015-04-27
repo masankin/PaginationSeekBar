@@ -469,12 +469,11 @@ public class PaginationSeekBar extends View {
                 if (pageNum > 0) {
                     setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
                     setProgress(mMin + pageCountPerOneBoard, true);
-                    //Position 5번으로 커서가 가게해야함.
+                    mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
                 } else if (pageNum <= 0) {
+                    mValue = 1;
                     setProgress(1, true);
                 }
-                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
-                //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (pageNum == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);
