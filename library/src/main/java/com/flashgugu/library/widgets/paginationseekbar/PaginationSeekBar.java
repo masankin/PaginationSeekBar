@@ -39,8 +39,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
 
-import com.flashgugu.library.widgets.paginationseekbar.R;
-
 import com.flashgugu.library.widgets.paginationseekbar.internal.PopupIndicator;
 import com.flashgugu.library.widgets.paginationseekbar.internal.compat.AnimatorCompat;
 import com.flashgugu.library.widgets.paginationseekbar.internal.compat.SeekBarCompat;
@@ -70,11 +68,11 @@ public class PaginationSeekBar extends View {
 
         public void onStopTrackingTouch(PaginationSeekBar seekBar);
 
-        public void onPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
+        public void onPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
 
-        public void onPrevPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
+        public void onPrevPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
 
-        public void onNextPageChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
+        public void onNextPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
     }
 
     /**
@@ -459,27 +457,25 @@ public class PaginationSeekBar extends View {
         mScrubber.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void notifyPageChange(int value, boolean fromUser) {
+    private void notifyPageChange(int pageNum, boolean fromUser) {
         if (mPublicChangeListener != null) {
-            if (value == prevIndex) {
-                if (value > 0) {
+            if (pageNum == prevIndex) {
+                if (pageNum > 0) {
                     setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
                     setProgress(mMin + pageCountPerOneBoard, true);
-                    //Position 5번으로 커서가 가게해야함.
-                } else if (value <= 0) {
+                } else if (pageNum <= 0) {
                     setProgress(1, true);
                 }
-                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, value, fromUser);
-                //다시 Thumbs를 적당한 위치로 돌려야함.
-            } else if (value == nextIndex) {
+                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
+            } else if (pageNum == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);
-                mPublicChangeListener.onNextPageChanged(PaginationSeekBar.this, value, fromUser);
+                mPublicChangeListener.onNextPageChanged(PaginationSeekBar.this, pageNum, fromUser);
             } else {
-                mPublicChangeListener.onPageChanged(PaginationSeekBar.this, value, fromUser);
+                mPublicChangeListener.onPageChanged(PaginationSeekBar.this, pageNum, fromUser);
             }
         }
-        onValueChanged(value);
+        onValueChanged(pageNum);
     }
 
     private void notifyProgress(int value, boolean fromUser) {
