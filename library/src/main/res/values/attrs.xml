@@ -19,6 +19,7 @@
     <!-- DiscreteSeekBar specific attributes -->
     <attr name="paginationSeekBarStyle" format="reference"/>
     <declare-styleable name="PaginationSeekBar">
+        <attr name="psb_pagecount_per_oneboard" format="integer|dimension"/>
         <attr name="psb_min" format="integer|dimension"/>
         <attr name="psb_max" format="integer|dimension"/>
         <attr name="psb_value" format="integer|dimension"/>

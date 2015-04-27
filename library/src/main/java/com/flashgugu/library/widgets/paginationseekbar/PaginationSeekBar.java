@@ -32,6 +32,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -207,6 +208,7 @@ public class PaginationSeekBar extends View {
         int indexMax = R.styleable.PaginationSeekBar_psb_max;
         int indexMin = R.styleable.PaginationSeekBar_psb_min;
         int indexValue = R.styleable.PaginationSeekBar_psb_value;
+        pageCountPerOneBoard = R.styleable.PaginationSeekBar_psb_pagecount_per_oneboard;
         final TypedValue out = new TypedValue();
         //Not sure why, but we wanted to be able to use dimensions here...
         if (a.getValue(indexMax, out)) {
@@ -230,7 +232,9 @@ public class PaginationSeekBar extends View {
                 value = a.getInteger(indexValue, value);
             }
         }
-        setPagecountPerOneboard(5);
+        if (a.getValue(pageCountPerOneBoard, out)){
+            pageCountPerOneBoard = a.getInteger(pageCountPerOneBoard, pageCountPerOneBoard);
+        }
         mMin = min;
         mMax = Math.max(min + 1, max);
         mValue = Math.max(min, Math.min(max, value));
@@ -280,6 +284,8 @@ public class PaginationSeekBar extends View {
         a.recycle();
 
         setNumericTransformer(new DefaultNumericTransformer());
+
+        setPagecountPerOneboard(pageCountPerOneBoard);
 
     }
 
@@ -463,10 +469,12 @@ public class PaginationSeekBar extends View {
                 if (pageNum > 0) {
                     setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
                     setProgress(mMin + pageCountPerOneBoard, true);
+                    //Position 5번으로 커서가 가게해야함.
                 } else if (pageNum <= 0) {
                     setProgress(1, true);
                 }
                 mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
+                //다시 Thumbs를 적당한 위치로 돌려야함.
             } else if (pageNum == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);
