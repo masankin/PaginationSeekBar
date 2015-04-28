@@ -208,7 +208,7 @@ public class PaginationSeekBar extends View {
         int indexMax = R.styleable.PaginationSeekBar_psb_max;
         int indexMin = R.styleable.PaginationSeekBar_psb_min;
         int indexValue = R.styleable.PaginationSeekBar_psb_value;
-        pageCountPerOneBoard = R.styleable.PaginationSeekBar_psb_pagecount_per_oneboard;
+        pageCountPerOneBoard = R.styleable.PaginationSeekBar_psb_pageCountPerOneBoard;
         final TypedValue out = new TypedValue();
         //Not sure why, but we wanted to be able to use dimensions here...
         if (a.getValue(indexMax, out)) {
