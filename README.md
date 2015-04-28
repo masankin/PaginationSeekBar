@@ -29,7 +29,7 @@ Once imported into your project, you just need to put them into your layous like
     android:id="@+id/test_seek_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:psb_pagecount_per_oneboard="5"
+    app:psb_pageCountPerOneBoard="5"
 />
 ```
 
