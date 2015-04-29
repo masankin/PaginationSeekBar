@@ -2,7 +2,7 @@
 
 ![screenshot](http://media.giphy.com/media/xTiTnCpqx7QLC71eyA/giphy.gif)
 
-PaginationSeekBar is UI Library for Easy&Quick Pagination. I recommand that, Use this for Board(List, Grid)UI.
+PaginationSeekBar is Android UI Library for Easy&Quick Pagination. I recommand that, Use this for Board(List, Grid)UI.
 
 ##Implementation details
 This thing runs on minSDK=7 (well, technically could run 4 but can't test since AVDs for api 4 are deprecated and just don't boot).
@@ -36,7 +36,7 @@ Once imported into your project, you just need to put them into your layous like
 ####Parameters
 You can tweak a few things of the DiscreteSeekbar:
 
-* **psb_pagecount_per_oneboard**: set Pagecount per OneBoard (Recommand 5 or 10)
+* **psb_pageCountPerOneBoard**: set Pagecount per OneBoard (Recommand 5 or 10)
 
 ####Design
  
