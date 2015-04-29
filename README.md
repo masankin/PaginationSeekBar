@@ -1,6 +1,6 @@
 #PaginationSeekBar
 
-![screenshot](http://media.giphy.com/media/xTiTnCpqx7QLC71eyA/giphy.gif)
+![screenshot](http://media.giphy.com/media/3o85xKkSX7qAsocAjS/giphy.gif)
 
 PaginationSeekBar is Android UI Library for Easy&Quick Pagination. I recommand that, Use this for Board(List, Grid)UI.
 
