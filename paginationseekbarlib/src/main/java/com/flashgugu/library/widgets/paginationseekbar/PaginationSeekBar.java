@@ -285,7 +285,7 @@ public class PaginationSeekBar extends View {
 
         setNumericTransformer(new DefaultNumericTransformer());
 
-        setPagecountPerOneboard(pageCountPerOneBoard);
+        initPagecountPerOneboard(pageCountPerOneBoard);
 
     }
 
@@ -351,10 +351,9 @@ public class PaginationSeekBar extends View {
      *  @see #setMin(int) this is dependency from defalut seekbar
      */
 
-    public void setPagecountPerOneboard(int pageCount) {
+    public void initPagecountPerOneboard(int pageCount) {
         pageCountPerOneBoard = pageCount;
-        setMin(0);
-        setMax(pageCount + 1);
+        setPagecountPerOneboard(1,pageCount);
     }
 
 
