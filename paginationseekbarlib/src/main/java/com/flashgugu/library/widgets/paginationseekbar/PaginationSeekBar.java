@@ -74,6 +74,8 @@ public class PaginationSeekBar extends View {
         public void onPrevPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
 
         public void onNextPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
+
+        public void onPrevLimitNotify();
     }
 
     /**
@@ -490,11 +492,12 @@ public class PaginationSeekBar extends View {
                 if (pageNum > 0) {
                     setPagecountPerOneboard((mMin + 1) - pageCountPerOneBoard, (mMax - 1) - pageCountPerOneBoard);
                     setProgress(mMin + pageCountPerOneBoard, true);
+                    mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
                 } else if (pageNum <= 0) {
                     mValue = pageNum = 1;
                     setProgress(1, false);
+                    mPublicChangeListener.onPrevLimitNotify();
                 }
-                mPublicChangeListener.onPrevPageChanged(PaginationSeekBar.this, pageNum, fromUser);
             } else if (pageNum == nextIndex) {
                 setPagecountPerOneboard((mMin + 1) + pageCountPerOneBoard, (mMax - 1) + pageCountPerOneBoard);
                 setProgress(mMax - pageCountPerOneBoard, true);

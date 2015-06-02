@@ -67,6 +67,11 @@ public class MainActivity extends ActionBarActivity implements ExampleFragment.O
                 viewpager.setCurrentItem(pageNum);
 
             }
+
+            @Override
+            public void onPrevLimitNotify() {
+                Toast.makeText(this,"Not moveable", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }
