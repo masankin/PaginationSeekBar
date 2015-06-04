@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.flashgugu.library.widgets.paginationseekbar.PaginationSeekBar;
 
@@ -70,7 +71,7 @@ public class MainActivity extends ActionBarActivity implements ExampleFragment.O
 
             @Override
             public void onPrevLimitNotify() {
-                Toast.makeText(this,"Not moveable", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Not Moveable", Toast.LENGTH_SHORT).show();
             }
         });
 
