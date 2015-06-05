@@ -234,7 +234,7 @@ public class PaginationSeekBar extends View {
                 value = a.getInteger(indexValue, value);
             }
         }
-        if (a.getValue(pageCountPerOneBoard, out)){
+        if (a.getValue(pageCountPerOneBoard, out)) {
             pageCountPerOneBoard = a.getInteger(pageCountPerOneBoard, pageCountPerOneBoard);
         }
         mMin = min;
@@ -273,7 +273,7 @@ public class PaginationSeekBar extends View {
         mScrubber = shapeDrawable;
         mScrubber.setCallback(this);
 
-        ThumbDrawable thumbDrawable = new ThumbDrawable(progressColor, thumbSize);
+        ThumbDrawable thumbDrawable = new ThumbDrawable(progressColor, thumbSize, mValue);
         mThumb = thumbDrawable;
         mThumb.setCallback(this);
         mThumb.setBounds(0, 0, mThumb.getIntrinsicWidth(), mThumb.getIntrinsicHeight());
@@ -332,30 +332,34 @@ public class PaginationSeekBar extends View {
         return mNumericTransformer;
     }
 
-    /** <<<This is highlight for PaginationSeekBar>>>
-     *  Set the PageCount for OneBoard Unit
-     *  This function is called when paginationing from thumbs
-     *  @param startPageNum necessary params to set pagecount value
-     *  @param endPageNum necessary params to set pagecount value
-     *  @see #setMax(int) this is dependency from defalut seekbar
-     *  @see #setMin(int) this is dependency from defalut seekbar
+    /**
+     * <<<This is highlight for PaginationSeekBar>>>
+     * Set the PageCount for OneBoard Unit
+     * This function is called when paginationing from thumbs
+     *
+     * @param startPageNum necessary params to set pagecount value
+     * @param endPageNum   necessary params to set pagecount value
+     * @see #setMax(int) this is dependency from defalut seekbar
+     * @see #setMin(int) this is dependency from defalut seekbar
      */
     public void setPagecountPerOneboard(int startPageNum, int endPageNum) {
         setMin(startPageNum - 1);
         setMax(endPageNum + 1);
     }
 
-    /** <<<This is highlight for PaginationSeekBar>>>
-     *  Set the PageCount for OneBoard Unit.
-     *  This function is called initialize PaginationSeekBar Object
-     *  @param pageCount necessary params to set pagecount value
-     *  @see #setMax(int) this is dependency from defalut seekbar
-     *  @see #setMin(int) this is dependency from defalut seekbar
+    /**
+     * <<<This is highlight for PaginationSeekBar>>>
+     * Set the PageCount for OneBoard Unit.
+     * This function is called initialize PaginationSeekBar Object
+     *
+     * @param pageCount necessary params to set pagecount value
+     * @see #setMax(int) this is dependency from defalut seekbar
+     * @see #setMin(int) this is dependency from defalut seekbar
      */
 
     public void initPagecountPerOneboard(int pageCount) {
         pageCountPerOneBoard = pageCount;
-        setPagecountPerOneboard(1,pageCount);
+        setPagecountPerOneboard(1, pageCount);
     }
 
 
@@ -480,10 +484,11 @@ public class PaginationSeekBar extends View {
         mScrubber.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
-    /** <<<This is highlight for PaginationSeekBar>>>
+    /**
+     * <<<This is highlight for PaginationSeekBar>>>
      * Notify Change of Page state. PrevPage, CurrentlyPage, NextPage
      *
-     * @param pageNum The pagenumber is that thumbs moved location
+     * @param pageNum  The pagenumber is that thumbs moved location
      * @param fromUser if the change was made from the user or not (i.e. the developer calling {@link #setProgress(int)}
      */
     private void notifyPageChange(int pageNum, boolean fromUser) {
@@ -657,11 +662,7 @@ public class PaginationSeekBar extends View {
 
         if (!isInEditMode()) {
             mIndicator.setValue(value, prevIndex, nextIndex);
-//            if (mNumericTransformer.useStringTransform()) {
-//                mIndicator.setValue(mNumericTransformer.transformToString(value), Integer.toString(prevIndex), Integer.toString(nextIndex));
-//            } else {
-//                mIndicator.setValue(convertValueToMessage(mNumericTransformer.transform(value)),Integer.toString(prevIndex), Integer.toString(nextIndex));
-//            }
+            mThumb.setValue(value);
         }
     }
 

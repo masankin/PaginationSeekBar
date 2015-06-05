@@ -18,8 +18,10 @@ package com.flashgugu.library.widgets.paginationseekbar.internal.drawable;
 
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Animatable;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -45,10 +47,12 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
     private final int mSize;
     private boolean mOpen;
     private boolean mRunning;
+    private int mValue;
 
-    public ThumbDrawable(@NonNull ColorStateList tintStateList, int size) {
+    public ThumbDrawable(@NonNull ColorStateList tintStateList, int size, int pageNum) {
         super(tintStateList);
         mSize = size;
+        this.mValue = pageNum;
     }
 
     @Override
@@ -65,8 +69,13 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
     public void doDraw(Canvas canvas, Paint paint) {
         if (!mOpen) {
             Rect bounds = getBounds();
-            float radius = (mSize / 2);
+            float radius = (mSize);
             canvas.drawCircle(bounds.centerX(), bounds.centerY(), radius, paint);
+
+            paint.setTextSize(27);
+            paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            paint.setColor(Color.WHITE);
+            canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY(), paint);
         }
     }
 
@@ -104,5 +113,9 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
     @Override
     public boolean isRunning() {
         return mRunning;
+    }
+
+    public void setValue(int value) {
+        this.mValue = value;
     }
 }
