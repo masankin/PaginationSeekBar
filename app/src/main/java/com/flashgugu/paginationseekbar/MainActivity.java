@@ -33,23 +33,6 @@ public class MainActivity extends ActionBarActivity implements ExampleFragment.O
         seekBar.setOnProgressChangeListener(new PaginationSeekBar.OnProgressChangeListener() {
 
             @Override
-            public void onProgressChanged(PaginationSeekBar seekBar, int value, boolean fromUser) {
-                Log.d(TAG, "onProgressChanged");
-            }
-
-            @Override
-            public void onStartTrackingTouch(PaginationSeekBar seekBar) {
-                Log.d(TAG, "onStartTrackingTouch");
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(PaginationSeekBar seekBar) {
-                Log.d(TAG, "onStopTrackingTouch");
-
-            }
-
-            @Override
             public void onPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser) {
                 Log.d(TAG, "onPageChanged");
                 viewpager.setCurrentItem(pageNum);
