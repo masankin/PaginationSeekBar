@@ -30,6 +30,7 @@ Once imported into your project, you just need to put them into your layous like
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:psb_pageCountPerOneBoard="5"
+    app:psb_thumbTextColor="#ffffff"
 />
 ```
 
@@ -46,7 +47,7 @@ You can tweak a few things of the DiscreteSeekbar:
 * **psb_indicatorColor**: color/colorStateList for the bubble shaped drawable
 * **psb_indicatorElevation**: related to android:elevation. Will only be used on API level 21+
 * **psb_rippleColor**: color/colorStateList for the ripple drawable seen when pressing the thumb. (Yes, it does a kind of "ripple" on API levels lower than 21 and a real RippleDrawable for 21+.
-
+* **psb_thumbTextColor**: set text color in thumb
 You can also use the attribute **paginationSeekBarStyle** on your themes with a custom Style to be applied to all the PaginationSeekBars on your app/activity/fragment/whatever.
 
 Thanks for [Gustavo Claramunt]'s [DiscreteSeekBar]
