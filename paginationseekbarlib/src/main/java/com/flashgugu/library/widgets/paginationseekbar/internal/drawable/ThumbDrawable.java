@@ -72,10 +72,12 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
             float radius = (mSize);
             canvas.drawCircle(bounds.centerX(), bounds.centerY(), radius, paint);
 
-            paint.setTextSize(27);
+            paint.setAntiAlias(true);
+            paint.setTextSize(mSize);
             paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             paint.setColor(Color.WHITE);
-            canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY(), paint);
+            paint.setTextAlign(Paint.Align.CENTER);
+            canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY()+9, paint);
         }
     }
 
