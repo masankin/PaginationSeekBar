@@ -60,14 +60,9 @@ public class PaginationSeekBar extends View {
          * When the {@link PaginationSeekBar} value changes
          *
          * @param seekBar  The PaginationSeekBar
-         * @param value    the new value
+         * @param pageNum  Present pagenumber
          * @param fromUser if the change was made from the user or not (i.e. the developer calling {@link #setProgress(int)}
          */
-    //    public void onProgressChanged(PaginationSeekBar seekBar, int value, boolean fromUser);
-
-    //    public void onStartTrackingTouch(PaginationSeekBar seekBar);
-
-    //    public void onStopTrackingTouch(PaginationSeekBar seekBar);
 
         public void onPageChanged(PaginationSeekBar seekBar, int pageNum, boolean fromUser);
 
@@ -519,9 +514,7 @@ public class PaginationSeekBar extends View {
     }
 
     private void notifyProgress(int value, boolean fromUser) {
-        if (mPublicChangeListener != null) {
-        //    mPublicChangeListener.onProgressChanged(PaginationSeekBar.this, value, fromUser);
-        }
+
         onValueChanged(value);
     }
 
@@ -751,9 +744,6 @@ public class PaginationSeekBar extends View {
             attemptClaimDrag();
             setHotspot(ev.getX(), ev.getY());
             mDragOffset = (int) (ev.getX() - bounds.left - mAddedTouchBounds);
-            if (mPublicChangeListener != null) {
-      //          mPublicChangeListener.onStartTrackingTouch(this);
-            }
         }
 
         return mIsDragging;
@@ -764,9 +754,7 @@ public class PaginationSeekBar extends View {
     }
 
     private void stopDragging() {
-        if (mPublicChangeListener != null) {
-       //     mPublicChangeListener.onStopTrackingTouch(this);
-        }
+
         mIsDragging = false;
         setPressed(false);
     }
