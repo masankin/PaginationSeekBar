@@ -247,6 +247,7 @@ public class PaginationSeekBar extends View {
         ColorStateList trackColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_trackColor);
         ColorStateList progressColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_progressColor);
         ColorStateList rippleColor = a.getColorStateList(R.styleable.PaginationSeekBar_psb_rippleColor);
+        int thumbTextColor = a.getColor(R.styleable.PaginationSeekBar_psb_thumbTextColor, Color.WHITE);
         boolean editMode = isInEditMode();
         if (editMode && rippleColor == null) {
             rippleColor = new ColorStateList(new int[][]{new int[]{}}, new int[]{Color.DKGRAY});
@@ -256,6 +257,9 @@ public class PaginationSeekBar extends View {
         }
         if (editMode && progressColor == null) {
             progressColor = new ColorStateList(new int[][]{new int[]{}}, new int[]{0xff009688});
+        }
+        if (editMode && thumbTextColor == 0) {
+            thumbTextColor = Color.WHITE;
         }
         mRipple = SeekBarCompat.getRipple(rippleColor);
         if (isLollipopOrGreater) {
@@ -273,7 +277,7 @@ public class PaginationSeekBar extends View {
         mScrubber = shapeDrawable;
         mScrubber.setCallback(this);
 
-        ThumbDrawable thumbDrawable = new ThumbDrawable(progressColor, thumbSize, mValue);
+        ThumbDrawable thumbDrawable = new ThumbDrawable(progressColor, thumbTextColor, thumbSize, mValue);
         mThumb = thumbDrawable;
         mThumb.setCallback(this);
         mThumb.setBounds(0, 0, mThumb.getIntrinsicWidth(), mThumb.getIntrinsicHeight());

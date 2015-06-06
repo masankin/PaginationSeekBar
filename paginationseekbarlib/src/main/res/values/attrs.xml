@@ -32,5 +32,6 @@
         <attr name="psb_indicatorElevation" format="dimension"/>
         <attr name="psb_indicatorFormatter" format="string|reference"/>
         <attr name="psb_rippleColor" format="color|reference"/>
+        <attr name="psb_thumbTextColor" format="color|reference"/>
     </declare-styleable>
 </resources>

@@ -48,11 +48,13 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
     private boolean mOpen;
     private boolean mRunning;
     private int mValue;
+    private int mTextColor = Color.WHITE;
 
-    public ThumbDrawable(@NonNull ColorStateList tintStateList, int size, int pageNum) {
+    public ThumbDrawable(@NonNull ColorStateList tintStateList, int thumbTextColor, int size, int pageNum) {
         super(tintStateList);
         mSize = size;
         this.mValue = pageNum;
+        this.mTextColor = thumbTextColor;
     }
 
     @Override
@@ -75,7 +77,7 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
             paint.setAntiAlias(true);
             paint.setTextSize(mSize);
             paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            paint.setColor(Color.WHITE);
+            paint.setColor(mTextColor);
             paint.setTextAlign(Paint.Align.CENTER);
             canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY()+9, paint);
         }
