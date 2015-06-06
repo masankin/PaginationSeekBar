@@ -20,6 +20,7 @@
         app:psb_indicatorColor="@color/colorPirmary"
         app:psb_progressColor="@color/colorPrimaryDark"
         app:psb_thumbTextColor="@color/default_white_background"
+        
         />
 
 </RelativeLayout>
