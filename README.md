@@ -1,4 +1,5 @@
 #PaginationSeekBar
+Version 1.0
 
 ![screenshot](http://media.giphy.com/media/3o85xKkSX7qAsocAjS/giphy.gif)
 
