@@ -79,7 +79,7 @@ public class ThumbDrawable extends StateDrawable implements Animatable {
             paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             paint.setColor(mTextColor);
             paint.setTextAlign(Paint.Align.CENTER);
-            canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY()+9, paint);
+            canvas.drawText(Integer.toString(mValue), bounds.centerX(),bounds.centerY()+10, paint);
         }
     }
 
